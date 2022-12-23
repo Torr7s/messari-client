@@ -9,3 +9,6 @@ tests
 
 # IDEs
 .vscode
+
+# Env
+.env
