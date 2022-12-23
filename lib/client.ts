@@ -114,19 +114,19 @@ export class MessariClient {
    * @returns {Promise<QueryResult<MessariAllAssets>>}
    */
   public async listAllAssets(): Promise<QueryResult<MessariAllAssets['data']>> {
-    const assets = await this.request.get<
+    const response = await this.request.get<
       MessariAllAssets
     >(`v2/assets`);
 
-    if (assets instanceof MessariError) {
-      return this.$handleError(assets);
+    if (response instanceof MessariError) {
+      return this.$handleError(response);
     }
     
     return {
       status: {
         timestamp: new Date().toISOString()
       },
-      data: assets.data
+      data: response.data
     }
   }
 
