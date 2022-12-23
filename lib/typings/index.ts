@@ -1,0 +1,119 @@
+export interface MessariAllAssets {
+  data: Array<{
+    id: string;
+    serial_id?: number;
+    symbol: string;
+    name: string;
+    slug: string;
+    metrics: {
+      marketcap: MessariAssetMarketCapProps;
+      market_data: MessariAssetMarketDataProps;
+    };
+  }>;
+}
+
+export interface MessariAsset {
+  data: {
+    id: string;
+    serial_id?: number;
+    symbol: string;
+    name: string;
+    slug: string;
+  };
+}
+
+export interface MessariAssetCommomProps {
+  id: string;
+  serial_id?: number;
+  symbol: string;
+  name: string;
+  slug: string;
+}
+
+export interface MessariAssetMarketCapProps {
+  rank: number;
+  marketcap_dominance_percent: number;
+  current_marketcap_usd: number;
+  liquid_marketcap_usd: number;
+  volume_turnover_last_24_hours_percent: number;
+  realized_marketcap_usd: number;
+  outstanding_marketcap_usd: number;
+}
+
+export interface MessariAssetMarketData {
+  data: {
+    id: string;
+    serial_id?: number;
+    symbol: string;
+    name: string;
+    slug: string;
+    market_data: MessariAssetMarketDataProps;
+  };
+}
+
+export interface MessariAssetMarketDataProps {
+  price_usd: number;
+  price_btc: number;
+  price_eth: number;
+  volume_last_24_hours: number;
+  real_volume_last_24_hours: number;
+  percent_change_usd_last_1_hour?: number | null;
+  percent_change_btc_last_1_hour?: number | null;
+  percent_change_eth_last_1_hour?: number | null;
+  percent_change_usd_last_24_hours?: number | null;
+  percent_change_btc_last_24_hours?: number | null;
+  percent_change_eth_last_24_hours?: number | null;
+  ohlcv_last_1_hour?: MessariAssetMarketOHLCVProps | null;
+  ohlcv_last_24_hour?: MessariAssetMarketOHLCVProps | null;
+  last_trade_at?: string | null;
+}
+
+export interface MessariAssetMarketOHLCVProps {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
+export interface MessariAssetMetrics {
+  data: {
+    id: string;
+    serial_id?: number;
+    symbol: string;
+    name: string;
+    slug: string;
+    market_data: MessariAssetMarketDataProps;
+    marketcap: MessariAssetMarketCapProps;
+    roi_data: {
+      percent_change_last_1_week: number;
+      percent_change_last_1_month: number;
+      percent_change_last_3_months: number;
+      percent_change_last_1_year: number;
+    };
+    reddit: {
+      active_user_count: number;
+      subscribers: number;
+    };
+  };
+}
+
+export type QueryResult<T = any> =
+  | {
+    /* Request failed */
+    status: {
+      error_code: number;
+      error_message: string;
+      timestamp: string;
+    };
+    data?: never;
+  } |
+  {
+    /* Request succeeded */
+    status: {
+      error_code?: never;
+      error_message?: never;
+      timestamp: string;
+    };
+    data: T
+  };
