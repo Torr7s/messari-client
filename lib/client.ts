@@ -45,7 +45,7 @@ export class MessariClient {
    * Get the basic metadata for an asset
    * 
    * @param {string} assetKey - The asset's ID, slug or symbol
-   * @returns {Promise<QueryResult<MessariAsset>>}
+   * @returns {Promise<QueryResult<MessariAssetCommomProps>>}
    */
   public async getAsset(assetKey: string): Promise<QueryResult<MessariAssetCommomProps>> {
     const response = await this.request.get<
@@ -89,7 +89,7 @@ export class MessariClient {
    * Get the quantitative metrics for an asset
    * 
    * @param {string} assetKey - The asset's ID, slug or symbol
-   * @returns {Promise<QueryResult<MessariAssetMetrics>>}
+   * @returns {Promise<QueryResult<MessariAssetMetrics['data']>>}
    */
   public async getAssetMetrics(assetKey: string): Promise<QueryResult<MessariAssetMetrics['data']>> {
     const response = await this.request.get<
@@ -111,7 +111,7 @@ export class MessariClient {
   /**
    * Get the list of all assets and their metrics
    * 
-   * @returns {Promise<QueryResult<MessariAllAssets>>}
+   * @returns {Promise<QueryResult<MessariAllAssets['data']>>}
    */
   public async listAllAssets(): Promise<QueryResult<MessariAllAssets['data']>> {
     const response = await this.request.get<
@@ -121,7 +121,7 @@ export class MessariClient {
     if (response instanceof MessariError) {
       return this.$handleError(response);
     }
-    
+
     return {
       status: {
         timestamp: new Date().toISOString()
