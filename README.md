@@ -1,6 +1,6 @@
 # Messari Client
 
-A Node.js client for interacting with the Messari API.
+A Node.js client for interacting with the Messari API, which provides crypto research, data and tools.
 
 
 ## Installation
@@ -18,7 +18,7 @@ $ yarn add @torr7s/messari-client
 import { MessariClient } from '@torr7s/messari-client';
 
 (async () => {
-    const client = new MessariClient('fake-messari-api-key');
+    const client = new MessariClient('random-messari-api-key');
     const asset = await client.getAsset('ethereum');
 
     if (asset.status.error_message) {
@@ -27,15 +27,8 @@ import { MessariClient } from '@torr7s/messari-client';
     }
 
     // Life goes on..
-});
+})();
 ```
 
-
-## Features
-
-- [☑] Get basic metadata for an asset 
-- [☑] Get the market data for an asset
-- [☑] Get the quantitative metrics for an asset
-- [☑] Get the list of all assets and their metrics
-
-
+## License
+This project is (MIT licensed.)[https://github.com/Torr7s/messari-client/blob/main/LICENSE
