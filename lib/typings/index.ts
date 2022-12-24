@@ -1,25 +1,18 @@
 export interface MessariAllAssets {
-  data: Array<{
-    id: string;
-    serial_id?: number;
-    symbol: string;
-    name: string;
-    slug: string;
-    metrics: {
-      marketcap: MessariAssetMarketCapProps;
+  data: Array<MessariAssetCommomProps & {
+    metrics: MessariAssetCommomProps & {
       market_data: MessariAssetMarketDataProps;
+      marketcap: MessariAssetMarketCapProps;
+      reddit?: {
+        active_user_count: number;
+        subscribers: number;
+      };
     };
   }>;
 }
 
 export interface MessariAsset {
-  data: {
-    id: string;
-    serial_id?: number;
-    symbol: string;
-    name: string;
-    slug: string;
-  };
+  data: MessariAssetCommomProps;
 }
 
 export interface MessariAssetCommomProps {
@@ -41,12 +34,7 @@ export interface MessariAssetMarketCapProps {
 }
 
 export interface MessariAssetMarketData {
-  data: {
-    id: string;
-    serial_id?: number;
-    symbol: string;
-    name: string;
-    slug: string;
+  data: MessariAssetCommomProps & {
     market_data: MessariAssetMarketDataProps;
   };
 }
@@ -77,12 +65,7 @@ export interface MessariAssetMarketOHLCVProps {
 }
 
 export interface MessariAssetMetrics {
-  data: {
-    id: string;
-    serial_id?: number;
-    symbol: string;
-    name: string;
-    slug: string;
+  data: MessariAssetCommomProps & {
     market_data: MessariAssetMarketDataProps;
     marketcap: MessariAssetMarketCapProps;
     roi_data: {
@@ -91,7 +74,7 @@ export interface MessariAssetMetrics {
       percent_change_last_3_months: number;
       percent_change_last_1_year: number;
     };
-    reddit: {
+    reddit?: {
       active_user_count: number;
       subscribers: number;
     };
