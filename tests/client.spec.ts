@@ -26,7 +26,7 @@ describe('MessariClient', (): void => {
   });
 
   describe('getAssetMetrics', (): void => {
-    it.only('should get an asset metrics', async (): Promise<void> => {
+    it('should get an asset metrics', async (): Promise<void> => {
       const metrics = await client.getAssetMetrics('ethereum');
   
       expect(metrics.status.error_code).toBeUndefined();
