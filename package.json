@@ -16,6 +16,14 @@
     "type": "git",
     "url": "git+https://github.com/torr7s/messari-client.git"
   },
+  "bugs": {
+    "url": "https://github.com/torr7s/messari-client/issues"
+  },
+  "keywords": [
+    "messari",
+    "messari-wrapper",
+    "client"
+  ],
   "scripts": {
     "build": "tsc",
     "bundle": "npm run build && npm pack",
