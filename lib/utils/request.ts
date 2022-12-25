@@ -6,7 +6,7 @@ import { QueryResult } from 'lib/typings';
 import { getRequestErrorMessage } from '../constraints/errors';
 
 type RequestConfigProps = {
-  messariHeaderApiKey: string
+  messariHeaderApiKey: string;
 }
 
 export class Request {
