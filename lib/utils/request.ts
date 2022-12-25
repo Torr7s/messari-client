@@ -5,17 +5,23 @@ import { QueryResult } from 'lib/typings';
 
 import { getRequestErrorMessage } from '../constraints/errors';
 
+type RequestConfigProps = {
+  messariHeaderApiKey: string
+}
+
 export class Request {
   private request: typeof undici.request;
 
-  constructor(private config: ConfigProps) {
+  constructor(private config: RequestConfigProps) {
     this.request = undici.request;
   }
 
   public async get<T>(endpoint: string): Promise<T | MessariError> {
-    const res = await this.request(`${this.config.baseURL}/${endpoint}`, {
+    const res = await this.request(`https://data.messari.io/api/${endpoint}`, {
       method: 'GET',
-      headers: this.config.headers
+      headers: {
+        'x-messari-api-key': this.config.messariHeaderApiKey
+      }
     }).then((val: Dispatcher.ResponseData) => val.body.json());
 
     if ((res as QueryResult).status.error_code) {
@@ -32,14 +38,3 @@ export class Request {
     return res as T;
   }
 }
-
-type ConfigProps = Pick<RequestConfig, 'headers'> & {
-  baseURL: string
-}
-
-type RequestConfig = Omit<Dispatcher.RequestOptions,
-  'origin' |
-  'path' |
-  'method'> & Partial<Pick<Dispatcher.RequestOptions, 'method'>> & {
-    dispatcher?: Dispatcher
-  }
