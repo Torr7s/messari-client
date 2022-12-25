@@ -15,7 +15,7 @@ import { MessariError } from './utils/errors/messari/messari.error';
  */
 export class MessariClient {
   private request: Request;
-  private messariAPIKey: string;
+  private messariApiKey: string;
 
   static validate(apiKey: string): void {
     if (!apiKey) {
@@ -26,18 +26,15 @@ export class MessariClient {
   /**
    * Creates a new MessariClient instance
    * 
-   * @param {String} messariAPIKey - The Messari api key  
+   * @param {String} messariApiKey - The Messari api key  
    */
-  constructor(messariAPIKey: string) {
-    MessariClient.validate(messariAPIKey);
+  constructor(messariApiKey: string) {
+    MessariClient.validate(messariApiKey);
 
-    this.messariAPIKey = messariAPIKey;
+    this.messariApiKey = messariApiKey;
 
     this.request = new Request({
-      baseURL: 'https://data.messari.io/api',
-      headers: {
-        'x-messari-api-key': this.messariAPIKey
-      }
+      messariHeaderApiKey: this.messariApiKey
     });
   }
 
