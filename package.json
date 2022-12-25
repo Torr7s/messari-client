@@ -5,7 +5,7 @@
     "name": "Matheus Torres"
   },
   "description": "A Node.js client for interacting with the Messari API",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/lib/index.js",
   "typings": "./dist/lib/index.d.ts",
   "directories": {
