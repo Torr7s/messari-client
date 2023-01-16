@@ -43,6 +43,15 @@ describe('MessariClient', (): void => {
     });
   });
 
+  describe('listAllNews', (): void => {
+    it('should list all news and analysis for all assets', async (): Promise<void> => {
+      const news = await client.listAllNews();
+
+      expect(news.status.error_code).toBeUndefined();
+      expect(news.data).toBeDefined();
+    });
+  });
+
   it('should fail when searching for an invalid asset', async (): Promise<void> => {
     await expect(client.getAsset('fake-asset').then(res => res.status.error_code)).resolves.toBeDefined();
     await expect(client.getAssetMetrics('fake-asset').then(res => res.status.error_code)).resolves.toBeDefined();
