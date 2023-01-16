@@ -81,6 +81,26 @@ export interface MessariAssetMetrics {
   };
 }
 
+export interface MessariAllNews {
+  data: [{
+    id: string;
+    title: string;
+    content: string;
+    references: Array<{
+      name: string;
+      url: string;
+    }>;
+    previewImage: string;
+    pdfUrl: string;
+    published_at: string;
+    author: {
+      name: string;
+    };
+    tags: string[];
+    url: string;
+  }];
+}
+
 export type QueryResult<T = any> =
   | {
     /* Request failed */
