@@ -95,11 +95,14 @@ export interface MessariAllNews {
     published_at: string;
     author: {
       name: string;
+      url: string;
     };
     tags: string[];
     url: string;
   }];
 }
+
+export interface MessariAssetNews extends MessariAllNews {}
 
 export type QueryResult<T = any> =
   | {
