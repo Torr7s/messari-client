@@ -52,6 +52,15 @@ describe('MessariClient', (): void => {
     });
   });
 
+  describe('listAssetNews', (): void => {
+    it('should list news for an asset', async (): Promise<void> => {
+      const assetNews = await client.listAssetNews('ethereum');
+
+      expect(assetNews.status.error_code).toBeUndefined();
+      expect(assetNews.data).toBeDefined();
+    });
+  })
+
   it('should fail when searching for an invalid asset', async (): Promise<void> => {
     await expect(client.getAsset('fake-asset').then(res => res.status.error_code)).resolves.toBeDefined();
     await expect(client.getAssetMetrics('fake-asset').then(res => res.status.error_code)).resolves.toBeDefined();
