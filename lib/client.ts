@@ -5,7 +5,8 @@ import {
   MessariAssetCommomProps,
   MessariAssetMarketDataProps,
   MessariAssetMetrics,
-  MessariAllNews
+  MessariAllNews,
+  MessariAssetNews
 } from './typings';
 
 import { Request } from './utils/request';
@@ -137,6 +138,29 @@ export class MessariClient {
     const response = await this.request.get<
       MessariAllNews
     >('v1/news');
+
+    if (response instanceof MessariError) {
+      return this.$handleError(response);
+    }
+
+    return {
+      status: {
+        timestamp: new Date().toISOString()
+      },
+      data: response.data
+    }
+  }
+
+  /**
+   * Get the latest news and analysis for an asset
+   * 
+   * @param {string} assetKey - The asset's ID, slug or symbol
+   * @returns {Promise<QueryResult<MessariAssetNews['data']>>}
+   */
+  public async listAssetNews(assetKey: string): Promise<QueryResult<MessariAssetNews['data']>> {
+    const response = await this.request.get<
+      MessariAssetNews
+    >(`v1/news/${assetKey}`);
 
     if (response instanceof MessariError) {
       return this.$handleError(response);
